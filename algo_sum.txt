@@ -1,0 +1,47 @@
+ALGORITHM sum_of_distinct
+VAR
+   set1 : ARRAY[50] OF INTEGER;
+   set2 : ARRAY[50] OF INTEGER;
+   n1, n2 : INTEGER;       // tailles des ensembles
+   i, j : INTEGER;         // indices pour parcourir les tableaux
+   sum : INTEGER;          // somme des éléments distincts
+BEGIN
+   // Lire la taille et les éléments du premier ensemble
+   Read(n1);
+   FOR i FROM 0 TO n1-1 DO
+       Read(set1[i]);
+   END_FOR
+
+   // Lire la taille et les éléments du deuxième ensemble
+   Read(n2);
+   FOR j FROM 0 TO n2-1 DO
+       Read(set2[j]);
+   END_FOR
+
+   sum := 0;
+
+   // Vérifier les éléments de set1 qui ne sont pas dans set2
+   FOR i FROM 0 TO n1-1 DO
+       j := 0;
+       WHILE (j < n2 AND set1[i] <> set2[j]) DO
+           j := j + 1;
+       END_WHILE
+       IF j = n2 THEN
+           sum := sum + set1[i];
+       END_IF
+   END_FOR
+
+   // Vérifier les éléments de set2 qui ne sont pas dans set1
+   FOR j FROM 0 TO n2-1 DO
+       i := 0;
+       WHILE (i < n1 AND set2[j] <> set1[i]) DO
+           i := i + 1;
+       END_WHILE
+       IF i = n1 THEN
+           sum := sum + set2[j];
+       END_IF
+   END_FOR
+
+   // Afficher la somme
+   Write(sum);
+END
