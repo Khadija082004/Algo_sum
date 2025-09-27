@@ -1,0 +1,72 @@
+Étape 1 : Procédure dot_product
+
+PROCEDURE dot_product(v1 : ARRAY_OF REAL, v2 : ARRAY_OF REAL, n : INTEGER, VAR ps : REAL)
+VAR
+   i : INTEGER
+BEGIN
+   ps ← 0
+   FOR i FROM 0 TO n-1 DO
+       ps ← ps + v1[i] * v2[i]
+   END_FOR
+   END_PROCEDURE
+
+   Étape 2 : Vérifier l’orthogonalité pour n paires
+ALGORITHM Orthogonalite
+VAR
+   nb, i, j, n : INTEGER
+   v1, v2 : ARRAY_OF REAL[50]
+   ps : REAL
+BEGIN
+   Write("Donner le nombre de paires de vecteurs : ")
+   Read(nb)
+
+   FOR i FROM 1 TO nb DO
+       Write("Donner la dimension des vecteurs : ")
+       Read(n)
+
+       // Lecture du vecteur v1
+       FOR j FROM 0 TO n-1 DO
+           Write("v1[", j, "] = ")
+           Read(v1[j])
+       END_FOR
+
+       // Lecture du vecteur v2
+       FOR j FROM 0 TO n-1 DO
+           Write("v2[", j, "] = ")
+           Read(v2[j])
+       END_FOR
+
+       // Appel de la procédure
+       dot_product(v1, v2, n, ps)
+
+       // Vérification orthogonalité
+       IF ps = 0 THEN
+           Write("Les vecteurs ", i, " sont orthogonaux.")
+       ELSE
+           Write("Les vecteurs ", i, " ne sont pas orthogonaux.")
+       END_IF
+   END_FOR
+END_ALGORITHM
+
+Étape 3 : Version avec fonction
+
+FUNCTION dot_product(v1 : ARRAY_OF REAL, v2 : ARRAY_OF REAL, n : INTEGER) : REAL
+VAR
+   i : INTEGER
+   ps : REAL
+BEGIN
+   ps ← 0
+   FOR i FROM 0 TO n-1 DO
+       ps ← ps + v1[i] * v2[i]
+   END_FOR
+   RETURN ps
+END_FUNCTION
+
+// Appel de la fonction
+ps ← dot_product(v1, v2, n)
+
+IF ps = 0 THEN
+   Write("Orthogonaux")
+ELSE
+   Write("Non orthogonaux")
+END_IF
